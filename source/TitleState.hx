@@ -83,6 +83,7 @@ class TitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 
 	var titleJSON:TitleData;
+	var marioLoop:Bool = true;
 
 	public static var updateVersion:String = '';
 
@@ -203,31 +204,19 @@ class TitleState extends MusicBeatState
 		#elseif CHARTING
 		MusicBeatState.switchState(new ChartingState());
 		#else
-		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new FlashingState());
-		} else {
-			#if desktop
-			if (!DiscordClient.isInitialized)
-			{
-				DiscordClient.initialize();
-				Application.current.onExit.add (function (exitCode) {
-					DiscordClient.shutdown();
-				});
-			}
-			#end
-
-			if (initialized)
-				startIntro();
-			else
-			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					startIntro();
-				});
-			}
+		#if desktop
+		if (!DiscordClient.isInitialized)
+		{
+			DiscordClient.initialize();
+			Application.current.onExit.add (function (exitCode) {
+				DiscordClient.shutdown();
+			});
 		}
+		#end
+		new FlxTimer().start(1, function(tmr:FlxTimer)
+		{
+			startIntro();
+		});
 		#end
 	}
 
@@ -263,7 +252,7 @@ class TitleState extends MusicBeatState
 			// music.play();
 
 			if(FlxG.sound.music == null) {
-				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+				FlxG.sound.playMusic(Paths.music('marioMenu'), 0);
 			}
 		}
 
@@ -492,27 +481,29 @@ class TitleState extends MusicBeatState
 			
 			if(pressedEnter)
 			{
+				marioLoop = false;
+				FlxG.sound.music.fadeOut(0.9, 0);
+				new FlxTimer().start(0.9, function(deeztmr:FlxTimer)
+				{
+					FlxG.sound.music.stop();
+				});
+
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
 				
 				if(titleText != null) titleText.animation.play('press');
 
-				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				transitioning = true;
-				// FlxG.sound.music.stop();
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (mustUpdate) {
-						MusicBeatState.switchState(new OutdatedState());
-					} else {
-						MusicBeatState.switchState(new MainMenuState());
-					}
+					MusicBeatState.switchState(new MainMenuState());
 					closedState = true;
+					FlxG.sound.playMusic(Paths.music('UImenu'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 1.2);
 				});
-				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 			}
 			#if TITLE_SCREEN_EASTER_EGG
 			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
@@ -637,68 +628,11 @@ class TitleState extends MusicBeatState
 			{
 				case 1:
 					//FlxG.sound.music.stop();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-					FlxG.sound.music.fadeIn(4, 0, 0.7);
-				case 2:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
-					#else
-					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-					#end
-				// credTextShit.visible = true;
-				case 4:
-					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('shubs', 15);
-					#else
-					addMoreText('present');
-					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
-				case 5:
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
-				case 6:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
-					#else
-					createCoolText(['In association', 'with'], -40);
-					#end
-				case 8:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
-				case 9:
-					deleteCoolText();
-					ngSpr.visible = false;
-				// credTextShit.visible = false;
-
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
-				case 10:
-					createCoolText([curWacky[0]]);
-				// credTextShit.visible = true;
-				case 12:
-					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
-				case 13:
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
-				case 14:
-					addMoreText('Friday');
-				// credTextShit.visible = true;
-				case 15:
-					addMoreText('Night');
-				// credTextShit.text += '\nNight';
-				case 16:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
-				case 17:
+					FlxG.sound.playMusic(Paths.music('marioMenu'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 0.7);
+					FlxG.sound.music.onComplete = function(){
+						trace("song completed");
+					}
 					skipIntro();
 			}
 		}
@@ -731,12 +665,12 @@ class TitleState extends MusicBeatState
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
 						remove(credGroup);
-						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
 
-						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+						FlxG.sound.playMusic(Paths.music('marioMenu'), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
+
 						return;
 				}
 
@@ -757,7 +691,7 @@ class TitleState extends MusicBeatState
 					remove(credGroup);
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
-						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+						FlxG.sound.playMusic(Paths.music('marioMenu'), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						transitioning = false;
 					};
