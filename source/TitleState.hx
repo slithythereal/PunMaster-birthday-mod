@@ -20,7 +20,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import options.GraphicsSettingsSubState;
-//import flixel.graphics.FlxGraphic;
+import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
@@ -41,7 +41,6 @@ import openfl.Assets;
 using StringTools;
 typedef TitleData =
 {
-
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -83,8 +82,7 @@ class TitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 
 	var titleJSON:TitleData;
-	var marioLoop:Bool = true;
-
+	var marioLoop:FlxSound;
 	public static var updateVersion:String = '';
 
 	override public function create():Void
@@ -218,6 +216,12 @@ class TitleState extends MusicBeatState
 			startIntro();
 		});
 		#end
+		var whitebg:FlxSprite = new FlxSprite();
+		whitebg.makeGraphic(FlxG.width, FlxG.height, 0xFFFFFFFF, true);
+		whitebg.screenCenter(X);
+		whitebg.screenCenter(Y);
+		whitebg.scale.set(1.20, 1.20);
+		add(whitebg);
 	}
 
 	var logoBl:FlxSprite;
@@ -319,9 +323,9 @@ class TitleState extends MusicBeatState
 		}
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 
-		add(gfDance);
+		//add(gfDance);
 		gfDance.shader = swagShader.shader;
-		add(logoBl);
+		//add(logoBl);
 		logoBl.shader = swagShader.shader;
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
@@ -364,7 +368,7 @@ class TitleState extends MusicBeatState
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		// titleText.screenCenter(X);
-		add(titleText);
+		//add(titleText);
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.screenCenter();
@@ -431,9 +435,8 @@ class TitleState extends MusicBeatState
 	{
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		var pressedEnter:Bool = FlxG.mouse.justPressed;
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -481,7 +484,6 @@ class TitleState extends MusicBeatState
 			
 			if(pressedEnter)
 			{
-				marioLoop = false;
 				FlxG.sound.music.fadeOut(0.9, 0);
 				new FlxTimer().start(0.9, function(deeztmr:FlxTimer)
 				{
@@ -630,9 +632,6 @@ class TitleState extends MusicBeatState
 					//FlxG.sound.music.stop();
 					FlxG.sound.playMusic(Paths.music('marioMenu'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.7);
-					FlxG.sound.music.onComplete = function(){
-						trace("song completed");
-					}
 					skipIntro();
 			}
 		}
@@ -702,7 +701,10 @@ class TitleState extends MusicBeatState
 			{
 				remove(ngSpr);
 				remove(credGroup);
-				FlxG.camera.flash(FlxColor.WHITE, 4);
+
+				var mario:FlxSprite = new FlxSprite(0, 0);
+				mario.loadGraphic(Paths.image('imlazy'));
+				add(mario);
 
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';

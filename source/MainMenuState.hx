@@ -17,6 +17,12 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import openfl.Lib;
+import lime.tools.WindowData;
+
+import openfl.filters.BitmapFilter;
+
+import lime.graphics.Image;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
@@ -48,6 +54,9 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		Lib.application.window.title = "HAPPY BIRTHDAY PUNMASTER";
+		Lib.application.window.setIcon(Image.fromBitmapData(Paths.image("appicons/punmaster").bitmap));
+
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -128,15 +137,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
-
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
 
 		// NG.core.calls.event.logEvent('swag').send();
 
