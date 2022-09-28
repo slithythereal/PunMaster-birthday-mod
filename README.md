@@ -7,7 +7,7 @@ This mod is a birthday gift for our friend PunMaster. He did so much for us and 
 3. `haxelib remove linc_luajit
 haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit` 
 copy and paste these lines above and then compile
-# IF YOUR GAME DOESN'T COMPILE, DM ME AT slithy#8701 ON DISCORD OR PING ME IN THE FRIDAY NIGHT MODDIN COMMUNITY DISCORD
+IF YOUR GAME DOESN'T COMPILE, DM ME AT slithy#8701 ON DISCORD OR PING ME IN THE FRIDAY NIGHT MODDIN COMMUNITY DISCORD SERVER
 The original psych engine credits are listed below
 
 # Friday Night Funkin' - Psych Engine
