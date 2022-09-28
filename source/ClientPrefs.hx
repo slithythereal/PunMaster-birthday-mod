@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
+	public static var freeplayUnlocked:Bool = false;
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var opponentStrums:Bool = true;
@@ -94,6 +95,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.freeplayUnlocked = freeplayUnlocked;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
 		FlxG.save.data.opponentStrums = opponentStrums;
@@ -141,6 +143,9 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.freeplayUnlocked != null) {
+			freeplayUnlocked = FlxG.save.data.freeplayUnlocked;
+		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}

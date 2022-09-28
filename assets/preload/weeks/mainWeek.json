@@ -1,0 +1,48 @@
+{
+	"storyName": "Your New Week",
+	"difficulties": "Normal",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"songs": [
+		[
+			"Invade",
+			"icon_catter",
+			[
+				0,
+				132,
+				51
+			],
+			"Judgement Day",
+			"icon_hex",
+			[
+				0,
+				0,
+				0
+			]
+		],
+		[
+			"Judgement Day",
+			"hex",
+			[
+				60,
+				0,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Custom Week",
+	"hiddenUntilUnlocked": false
+}

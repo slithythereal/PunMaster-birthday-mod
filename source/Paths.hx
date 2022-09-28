@@ -190,6 +190,15 @@ class Paths
 		return getPath('$key.lua', TEXT, library);
 	}
 
+    inline static public function getXMLAtlas(key:String, ?library:String):FlxAtlasFrames
+    {
+        return FlxAtlasFrames.fromTexturePackerXml(image(key, library), file('images/$key.xml', library));
+    }
+    
+    inline static public function getJSONAtlas(key:String, ?library:String)
+    {
+        return FlxAtlasFrames.fromTexturePackerJson(image(key, library), file('images/$key.json', library));
+    }
 	static public function video(key:String)
 	{
 		#if MODS_ALLOWED

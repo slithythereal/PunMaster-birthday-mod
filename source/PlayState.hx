@@ -73,6 +73,8 @@ import sys.io.File;
 import vlc.MP4Handler;
 #end
 
+import openfl.Lib;
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -284,6 +286,8 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	var songName:String = '';
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -388,13 +392,33 @@ class PlayState extends MusicBeatState
 		#end
 
 		GameOverSubstate.resetVariables();
-		var songName:String = Paths.formatToSongPath(SONG.song);
+		songName = Paths.formatToSongPath(SONG.song);
+
+
+		switch(songName) //changes the app window name
+		{
+			case 'invade':
+				Lib.application.window.title = "Alien Invasion";
+			case 'judgement-day':
+				Lib.application.window.title = "Purgatory";
+			case 'shid': //this stays bc funny
+				Lib.application.window.title = "heyy ummm idk what happened or if its really you but it was your name and the same avatar and you sent a sussy erm ** stuff like what the fuck? https://discord.gg/innersloth check #among-us-general and youll see. anyways until you explain what happened im blocking you. sorry if this is a misunderstanding but i do not wanna take risks with having creeps on my among us friendslist.";
+			case 'gauntlet': //remove if you want ig
+				Lib.application.window.title = "The Takeover Part 6 - Interactive Adventure";
+			default:
+				Lib.application.window.title = "Pun's 20th B-DAY MOD | CURRENT SONG: " + songName;
+		}
 
 		curStage = SONG.stage;
-		//trace('stage is: ' + curStage);
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{
+				case 'invade':
+					curStage = 'AI';
+				case 'judgement-day':
+					curStage = 'purgatory';
+				case 'shid':
+					curStage = 'shidland'; //cakie rename this to whatever you want lul
 				default:
 					curStage = 'stage';
 			}
@@ -475,15 +499,17 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 				}
 				dadbattleSmokes = new FlxSpriteGroup(); //troll'd
-
+			case 'AI':
+				var bg:BGSprite = new BGSprite('stages/aliens_invaded', 0, 0, 1, 1);
+				bg.scale.set(1.2, 1.2);
+				add(bg);
 		}
 
-		switch(Paths.formatToSongPath(SONG.song))
+		switch(songName)
 		{
-			case 'stress':
-				GameOverSubstate.characterName = 'bf-holding-gf-dead';
 		}
 
+		//shid bpm = 169
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
@@ -559,8 +585,40 @@ class PlayState extends MusicBeatState
 				default:
 					gfVersion = 'gf';
 			}
+			
+			SONG.gfVersion = gfVersion;
+		}
 
-			SONG.gfVersion = gfVersion; //Fix for the Chart Editor
+		var bfVersion:String = SONG.player1;
+		if(bfVersion == null || bfVersion.length < 1)
+		{
+			switch (songName)
+			{
+				case 'invade':
+					bfVersion = 'catterbf-flipped';
+				case 'judgement-day':
+					bfVersion = 'catterbf';
+				default:
+					bfVersion = 'bf';
+			}
+
+			SONG.player1 = bfVersion;
+		}
+
+		var dadVersion:String = SONG.player2;
+		if(dadVersion == null || dadVersion.length < 1)
+		{
+			switch (songName)
+			{
+				case 'invade':
+					dadVersion = 'alien';
+				case 'judgement-day':
+					dadVersion = 'hexpun';
+				default:
+					dadVersion = 'dad';
+			}
+
+			SONG.player2 = dadVersion;
 		}
 
 		if (!stageData.hide_girlfriend)
@@ -1241,7 +1299,7 @@ class PlayState extends MusicBeatState
 		senpaiEvil.screenCenter();
 		senpaiEvil.x += 300;
 
-		var songName:String = Paths.formatToSongPath(SONG.song);
+		songName = Paths.formatToSongPath(SONG.song);
 		if (songName == 'roses' || songName == 'thorns')
 		{
 			remove(black);
@@ -1678,7 +1736,7 @@ class PlayState extends MusicBeatState
 
 		var daBeats:Int = 0; // Not exactly representative of 'daBeats' lol, just how much it has looped
 
-		var songName:String = Paths.formatToSongPath(SONG.song);
+		songName = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
 		#if MODS_ALLOWED
 		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
@@ -2914,7 +2972,7 @@ class PlayState extends MusicBeatState
 
 				storyPlaylist.remove(storyPlaylist[0]);
 
-				if (storyPlaylist.length <= 0)
+				if (storyPlaylist.length <= 0 && ClientPrefs.freeplayUnlocked)
 				{
 					WeekData.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('UImenu'));
@@ -2923,7 +2981,7 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+					MusicBeatState.switchState(new MainMenuState());
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
@@ -2938,6 +2996,35 @@ class PlayState extends MusicBeatState
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
+				}
+				else if (storyPlaylist.length <= 0 && !ClientPrefs.freeplayUnlocked)
+				{
+					ClientPrefs.freeplayUnlocked = true;
+					new FlxTimer().start(0.1, function(yuh:FlxTimer)
+						{
+							WeekData.loadTheFirstEnabledMod();
+							FlxG.sound.playMusic(Paths.music('UImenu'));
+		
+							cancelMusicFadeTween();
+							if(FlxTransitionableState.skipNextTransIn) {
+								CustomFadeTransition.nextCamera = null;
+							}
+							MusicBeatState.switchState(new MainMenuState());
+		
+							// if ()
+							if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
+								StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
+		
+								if (SONG.validScore)
+								{
+									Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
+								}
+		
+								FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+								FlxG.save.flush();
+							}
+							changedDifficulty = false;
+						});
 				}
 				else
 				{

@@ -84,6 +84,10 @@ class TitleState extends MusicBeatState
 	var titleJSON:TitleData;
 	var marioLoop:FlxSound;
 	public static var updateVersion:String = '';
+	var pinJumpscare:FlxSprite;
+	var whitebg:FlxSprite;
+	var blackbg:FlxSprite;
+	var mario:FlxSprite;
 
 	override public function create():Void
 	{
@@ -112,6 +116,8 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end*/
+		FlxG.mouse.visible = true;
+		FlxG.mouse.useSystemCursor = true;
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = muteKeys;
@@ -131,6 +137,13 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		ClientPrefs.loadPrefs();
+
+		whitebg = new FlxSprite();
+		whitebg.makeGraphic(FlxG.width, FlxG.height, 0xFFFFFFFF, true);
+		whitebg.screenCenter(X);
+		whitebg.screenCenter(Y);
+		whitebg.scale.set(1.20, 1.20);
+		add(whitebg);
 
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates && !closedState) {
@@ -196,7 +209,7 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
+
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
@@ -216,12 +229,6 @@ class TitleState extends MusicBeatState
 			startIntro();
 		});
 		#end
-		var whitebg:FlxSprite = new FlxSprite();
-		whitebg.makeGraphic(FlxG.width, FlxG.height, 0xFFFFFFFF, true);
-		whitebg.screenCenter(X);
-		whitebg.screenCenter(Y);
-		whitebg.scale.set(1.20, 1.20);
-		add(whitebg);
 	}
 
 	var logoBl:FlxSprite;
@@ -268,7 +275,7 @@ class TitleState extends MusicBeatState
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
 		}else{
-			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		}
 
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -484,10 +491,58 @@ class TitleState extends MusicBeatState
 			
 			if(pressedEnter)
 			{
+				FlxG.mouse.visible = false;
+				FlxG.mouse.useSystemCursor = false;
 				FlxG.sound.music.fadeOut(0.9, 0);
 				new FlxTimer().start(0.9, function(deeztmr:FlxTimer)
 				{
 					FlxG.sound.music.stop();
+					new FlxTimer().start(1, function(deeztmr:FlxTimer)
+					{
+						FlxG.camera.shake(0.1, 1);
+						var brokenGlass:FlxSprite = new FlxSprite(-250,100); 
+						brokenGlass.loadGraphic(Paths.image('glassbreak'));
+						brokenGlass.antialiasing = true;
+						brokenGlass.scrollFactor.set();
+						brokenGlass.scale.set(2, 2);
+						add(brokenGlass);
+
+						FlxG.sound.play(Paths.sound('glassBreak'), 0.7);
+
+						new FlxTimer().start(2, function(deeztmr:FlxTimer)
+						{
+							remove(brokenGlass);
+
+							pinJumpscare = new FlxSprite(-250,100); 
+							pinJumpscare.frames = Paths.getJSONAtlas('PinJumpscare');
+							pinJumpscare.animation.addByPrefix('the','anim',24);
+							pinJumpscare.animation.play('the');
+							pinJumpscare.antialiasing = true;
+							pinJumpscare.scrollFactor.set();
+							pinJumpscare.scale.set(2, 2);
+							add(pinJumpscare);
+
+							new FlxTimer().start(1.5, function(deeztmr:FlxTimer)
+							{
+								remove(mario);
+								remove(pinJumpscare);
+
+								blackbg = new FlxSprite();
+								blackbg.makeGraphic(FlxG.width, FlxG.height, 0xFF000000, true);
+								blackbg.screenCenter(X);
+								blackbg.screenCenter(Y);
+								blackbg.scale.set(1.20, 1.20);
+								add(blackbg);
+								new FlxTimer().start(1.5, function(tmr:FlxTimer)
+								{
+									MusicBeatState.switchState(new MainMenuState());
+									closedState = true;
+									FlxG.sound.playMusic(Paths.music('UImenu'), 0);
+									FlxG.sound.music.fadeIn(1, 0, 1.2);
+								});
+							});
+						});
+					});
 				});
 
 				titleText.color = FlxColor.WHITE;
@@ -499,13 +554,6 @@ class TitleState extends MusicBeatState
 
 				transitioning = true;
 
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					MusicBeatState.switchState(new MainMenuState());
-					closedState = true;
-					FlxG.sound.playMusic(Paths.music('UImenu'), 0);
-					FlxG.sound.music.fadeIn(1, 0, 1.2);
-				});
 			}
 			#if TITLE_SCREEN_EASTER_EGG
 			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
@@ -531,7 +579,7 @@ class TitleState extends MusicBeatState
 
 							FlxG.sound.play(Paths.sound('ToggleJingle'));
 
-							var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+							var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 							black.alpha = 0;
 							add(black);
 
@@ -702,7 +750,7 @@ class TitleState extends MusicBeatState
 				remove(ngSpr);
 				remove(credGroup);
 
-				var mario:FlxSprite = new FlxSprite(0, 0);
+				mario = new FlxSprite(0, 0);
 				mario.loadGraphic(Paths.image('imlazy'));
 				add(mario);
 

@@ -1,0 +1,32 @@
+{
+	"songs": [
+		[
+			"shid",
+			"pin",
+			[
+				0,
+				233,
+				255
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "Normal",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "Your New Week",
+	"weekName": "PINMISTER",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": true,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

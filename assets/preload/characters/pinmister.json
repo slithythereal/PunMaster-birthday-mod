@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "pin idle"
+		},
+		{
+			"offsets": [
+				660,
+				660
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "pin left"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-110
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "pin down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				140,
+				560
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "pin up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-90,
+				257
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "pin right",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/thepin",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "shid",
+	"flip_x": true,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		-340,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

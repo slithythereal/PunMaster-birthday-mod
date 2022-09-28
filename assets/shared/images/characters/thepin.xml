@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="thepin.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="pin down0000" x="0" y="0" width="478" height="183" frameX="0" frameY="-190" frameWidth="478" frameHeight="373"/>
+	<SubTexture name="pin down0001" x="478" y="0" width="478" height="293" frameX="0" frameY="-80" frameWidth="478" frameHeight="373"/>
+	<SubTexture name="pin down0002" x="956" y="0" width="438" height="333" frameX="-20" frameY="-40" frameWidth="478" frameHeight="373"/>
+	<SubTexture name="pin down0003" x="1394" y="0" width="422" height="353" frameX="-28" frameY="-20" frameWidth="478" frameHeight="373"/>
+	<SubTexture name="pin down0004" x="1816" y="0" width="422" height="372" frameX="-28" frameY="0" frameWidth="478" frameHeight="373"/>
+	<SubTexture name="pin idle0000" x="2238" y="0" width="482" height="341" frameX="0" frameY="-98" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0001" x="2238" y="0" width="482" height="341" frameX="0" frameY="-57" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0002" x="2238" y="0" width="482" height="341" frameX="0" frameY="-30" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0003" x="2238" y="0" width="482" height="341" frameX="0" frameY="-14" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0004" x="2720" y="0" width="482" height="341" frameX="0" frameY="-11" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0005" x="3202" y="0" width="482" height="341" frameX="0" frameY="0" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0006" x="2720" y="0" width="482" height="341" frameX="0" frameY="-15" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0007" x="2720" y="0" width="482" height="341" frameX="0" frameY="-78" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0008" x="2720" y="0" width="482" height="341" frameX="0" frameY="-75" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin idle0009" x="2720" y="0" width="482" height="341" frameX="0" frameY="-101" frameWidth="482" frameHeight="442"/>
+	<SubTexture name="pin left0000" x="3684" y="0" width="788" height="727" frameX="0" frameY="-384" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin left0001" x="4472" y="0" width="789" height="1062" frameX="-1057" frameY="-216" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin left0002" x="5261" y="0" width="789" height="1302" frameX="-1814" frameY="-96" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin left0003" x="6050" y="0" width="789" height="1446" frameX="-2267" frameY="-24" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin left0004" x="6839" y="0" width="789" height="1494" frameX="-2419" frameY="0" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin left0005" x="6839" y="0" width="789" height="1494" frameX="-2419" frameY="0" frameWidth="3208" frameHeight="1494"/>
+	<SubTexture name="pin right0000" x="0" y="1494" width="844" height="744" frameX="0" frameY="0" frameWidth="891" frameHeight="744"/>
+	<SubTexture name="pin right0001" x="844" y="1494" width="811" height="744" frameX="-41" frameY="0" frameWidth="891" frameHeight="744"/>
+	<SubTexture name="pin right0002" x="1655" y="1494" width="794" height="744" frameX="-77" frameY="0" frameWidth="891" frameHeight="744"/>
+	<SubTexture name="pin right0003" x="2449" y="1494" width="784" height="744" frameX="-98" frameY="0" frameWidth="891" frameHeight="744"/>
+	<SubTexture name="pin right0004" x="3233" y="1494" width="777" height="744" frameX="-114" frameY="0" frameWidth="891" frameHeight="744"/>
+	<SubTexture name="pin up0000" x="4010" y="1494" width="732" height="604" frameX="-44" frameY="-92" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0001" x="4742" y="1494" width="672" height="558" frameX="-34" frameY="-137" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0002" x="5414" y="1494" width="598" height="767" frameX="-92" frameY="0" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0003" x="6012" y="1494" width="570" height="624" frameX="-71" frameY="-109" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0004" x="6582" y="1494" width="624" height="570" frameX="-44" frameY="-136" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0005" x="7206" y="1494" width="604" height="729" frameX="-17" frameY="-59" frameWidth="776" frameHeight="791"/>
+	<SubTexture name="pin up0006" x="0" y="2261" width="597" height="769" frameX="0" frameY="-22" frameWidth="776" frameHeight="791"/>
+</TextureAtlas>
