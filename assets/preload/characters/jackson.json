@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "jackson idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-1,
+				-1
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "jackson left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-3,
+				0
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "jackson down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				78,
+				10
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "jackson up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				64,
+				3
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "jackson right",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/jack_assets",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "jack",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		40,
+		40
+	],
+	"camera_position": [
+		-50,
+		-50
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

@@ -402,13 +402,13 @@ class PlayState extends MusicBeatState
 		{
 			case 'invade':
 				Lib.application.window.title = "Alien Invasion";
-			case 'serial':
+			case 'homicide':
 				Lib.application.window.title = "Quick Jackson Funkin test";
 			case 'judgement-day':
 				Lib.application.window.title = "Purgatory";
 			case 'shid': //this stays bc funny
 				Lib.application.window.title = "heyy ummm idk what happened or if its really you but it was your name and the same avatar and you sent a sussy erm ** stuff like what the fuck? https://discord.gg/innersloth check #among-us-general and youll see. anyways until you explain what happened im blocking you. sorry if this is a misunderstanding but i do not wanna take risks with having creeps on my among us friendslist.";
-			case 'gauntlet': //remove if you want ig
+			case 'gauntlet': //v2 coming soon (i guess...)
 				Lib.application.window.title = "The Takeover Part 6 - Interactive Adventure";
 			default:
 				Lib.application.window.title = "Pun's 20th B-DAY MOD | CURRENT SONG: " + songName;
@@ -422,6 +422,8 @@ class PlayState extends MusicBeatState
 					curStage = 'AI';
 				case 'judgement-day':
 					curStage = 'purgatory';
+				case 'homicide':
+					curStage = 'jackson';
 				case 'shid':
 					curStage = 'ballz';
 				default:
@@ -516,9 +518,12 @@ class PlayState extends MusicBeatState
 				var bg:BGSprite = new BGSprite('stages/secret_land', 0, 0, 1, 1);
 				bg.scale.set(2, 2);
 				add(bg);
+			case 'jackson':
+				var bg:BGSprite = new BGSprite('stages/rushed_jack_bg', 0, 0, 1, 1);
+				bg.scale.set(1.7, 1.7);
+				add(bg);
 		}
 
-		//shid bpm = 169
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
@@ -605,6 +610,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'invade':
 					bfVersion = 'catterbf-flipped';
+				case 'homicide':
+					bfVersion = 'mspaint';
 				case 'judgement-day':
 					bfVersion = 'catterbf';
 				case 'shid':
@@ -623,6 +630,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'invade':
 					dadVersion = 'alien';
+				case 'homicide':
+					dadVersion = 'jackson';
 				case 'judgement-day':
 					dadVersion = 'hexpun';
 				case 'shid':
