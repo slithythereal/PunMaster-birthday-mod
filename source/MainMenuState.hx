@@ -159,7 +159,7 @@ class MainMenuState extends MusicBeatState
 				});
 			}
 			#if desktop
-			else if (FlxG.keys.anyJustPressed(debugKeys))
+			else if (FlxG.keys.anyJustPressed(debugKeys) && ClientPrefs.freeplayUnlocked)
 			{
 				FlxG.mouse.visible = false;
 				selectedSomethin = true;

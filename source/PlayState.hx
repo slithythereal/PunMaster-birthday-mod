@@ -232,6 +232,9 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
+	var blackScreen:FlxSprite;
+	var yourewinner:FlxText;
+
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
 	public static var seenCutscene:Bool = false;
@@ -874,6 +877,26 @@ class PlayState extends MusicBeatState
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
+		}
+		if(!ClientPrefs.freeplayUnlocked) {
+			switch(songName)
+			{
+				case 'judgement-day':
+					blackScreen = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					add(blackScreen);
+					//blackScreen.alpha = 0.5;
+					blackScreen.alpha = 0.001;
+					yourewinner = new FlxText(0, 100, FlxG.width,
+					"CONGRADULATIONS!\n"
+					+ "YOU UNLOCKED THE FREEPLAY MENU!\n"
+					+ "NOW LISTEN TO THIS JINGLE BEFORE YOU CAN GO TO SAID MENU!",
+					20);
+					yourewinner.setFormat(Paths.font("vcr.ttf"), 80, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					add(yourewinner);
+					yourewinner.alpha = 0.001;
+					yourewinner.cameras = [camHUD];
+					blackScreen.cameras = [camHUD];
+			}
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -2185,7 +2208,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
+		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene && ClientPrefs.freeplayUnlocked)
 		{
 			openChartEditor();
 		}
@@ -2219,7 +2242,7 @@ class PlayState extends MusicBeatState
 		else
 			iconP2.animation.curAnim.curFrame = 0;
 
-		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
+		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene && ClientPrefs.freeplayUnlocked) {
 			persistentUpdate = false;
 			paused = true;
 			cancelMusicFadeTween();
@@ -3008,6 +3031,8 @@ class PlayState extends MusicBeatState
 				}
 				else if (storyPlaylist.length <= 0 && !ClientPrefs.freeplayUnlocked)
 				{
+					blackScreen.alpha = 0.5;
+					yourewinner.alpha = 1;
 					ClientPrefs.freeplayUnlocked = true;
 					FlxG.save.data.freeplayUnlocked = ClientPrefs.freeplayUnlocked;
 					FlxG.sound.play(Paths.sound('freeplayJingle'));
