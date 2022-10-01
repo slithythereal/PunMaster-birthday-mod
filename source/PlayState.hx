@@ -418,7 +418,7 @@ class PlayState extends MusicBeatState
 				case 'judgement-day':
 					curStage = 'purgatory';
 				case 'shid':
-					curStage = 'shidland'; //cakie rename this to whatever you want lul
+					curStage = 'ballz'; //gladly
 				default:
 					curStage = 'stage';
 			}
@@ -503,8 +503,15 @@ class PlayState extends MusicBeatState
 				var bg:BGSprite = new BGSprite('stages/aliens_invaded', 0, 0, 1, 1);
 				bg.scale.set(1.2, 1.2);
 				add(bg);
+			case 'ballz':
+				var bg:BGSprite = new BGSprite('stages/real footage', 0, 0, 1, 1);
+				bg.scale.set(2, 2);
+				add(bg);
+			case 'purgatory':
+				var bg:BGSprite = new BGSprite('stages/secret_land', 0, 0, 1, 1);
+				bg.scale.set(2, 2);
+				add(bg);
 		}
-
 		switch(songName)
 		{
 		}
@@ -2992,7 +2999,6 @@ class PlayState extends MusicBeatState
 							Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
 						}
 
-						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
@@ -3000,7 +3006,9 @@ class PlayState extends MusicBeatState
 				else if (storyPlaylist.length <= 0 && !ClientPrefs.freeplayUnlocked)
 				{
 					ClientPrefs.freeplayUnlocked = true;
-					new FlxTimer().start(0.1, function(yuh:FlxTimer)
+					FlxG.save.data.freeplayUnlocked = ClientPrefs.freeplayUnlocked;
+					FlxG.sound.play(Paths.sound('freeplayJingle'));
+					new FlxTimer().start(14, function(yuh:FlxTimer)
 						{
 							WeekData.loadTheFirstEnabledMod();
 							FlxG.sound.playMusic(Paths.music('UImenu'));

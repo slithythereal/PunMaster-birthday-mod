@@ -1,17 +1,3 @@
-# FNF PUNMASTER 20TH BDAY MOD
-This mod is a birthday gift for our friend PunMaster. He did so much for us and we thought we should return the favor by making this. 
-
-# FIXING COMPILATION ERRORS
-1. copy and paste `haxelib install hxcodec` into your command prompt and then compile
-2. copy and paste `haxelib install linc_luajit` into your command prompt then compile
-3. `haxelib remove linc_luajit
-haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit` 
-copy and paste these lines above and then compile
-
-IF YOUR GAME DOESN'T COMPILE, DM ME AT slithy#8701 ON DISCORD OR PING ME IN THE FRIDAY NIGHT MODDIN COMMUNITY DISCORD SERVER
-
-The original psych engine credits are listed below
-
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 

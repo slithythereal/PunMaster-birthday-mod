@@ -105,10 +105,13 @@ class FreeplayState extends MusicBeatState
 			}
 		}*/
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+
+		bg = new FlxSprite();
+		bg.makeGraphic(FlxG.width, FlxG.height, 0xFF00EEFF, true);
+		bg.screenCenter(X);
+		bg.screenCenter(Y);
+		bg.scale.set(1.20, 1.20);
 		add(bg);
-		bg.screenCenter();
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -155,7 +158,6 @@ class FreeplayState extends MusicBeatState
 		add(scoreText);
 
 		if(curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
 
 		if(lastDifficultyName == '')
