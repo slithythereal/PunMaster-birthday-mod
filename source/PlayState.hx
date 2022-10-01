@@ -399,6 +399,8 @@ class PlayState extends MusicBeatState
 		{
 			case 'invade':
 				Lib.application.window.title = "Alien Invasion";
+			case 'serial':
+				Lib.application.window.title = "Quick Jackson Funkin test";
 			case 'judgement-day':
 				Lib.application.window.title = "Purgatory";
 			case 'shid': //this stays bc funny
@@ -418,7 +420,7 @@ class PlayState extends MusicBeatState
 				case 'judgement-day':
 					curStage = 'purgatory';
 				case 'shid':
-					curStage = 'ballz'; //gladly
+					curStage = 'ballz';
 				default:
 					curStage = 'stage';
 			}
@@ -512,9 +514,6 @@ class PlayState extends MusicBeatState
 				bg.scale.set(2, 2);
 				add(bg);
 		}
-		switch(songName)
-		{
-		}
 
 		//shid bpm = 169
 		if(isPixelStage) {
@@ -605,6 +604,8 @@ class PlayState extends MusicBeatState
 					bfVersion = 'catterbf-flipped';
 				case 'judgement-day':
 					bfVersion = 'catterbf';
+				case 'shid':
+					bfVersion = 'shidpie';
 				default:
 					bfVersion = 'bf';
 			}
@@ -621,6 +622,8 @@ class PlayState extends MusicBeatState
 					dadVersion = 'alien';
 				case 'judgement-day':
 					dadVersion = 'hexpun';
+				case 'shid':
+					dadVersion = 'pinmister';
 				default:
 					dadVersion = 'dad';
 			}
@@ -3010,6 +3013,10 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('freeplayJingle'));
 					new FlxTimer().start(14, function(yuh:FlxTimer)
 						{
+							new FlxTimer().start(12, function(bfhey:FlxTimer) 
+							{
+								boyfriend.playAnim('hey', true);
+							});
 							WeekData.loadTheFirstEnabledMod();
 							FlxG.sound.playMusic(Paths.music('UImenu'));
 		

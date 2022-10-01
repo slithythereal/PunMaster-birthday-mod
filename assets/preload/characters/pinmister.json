@@ -62,16 +62,16 @@
 		0,
 		0
 	],
-	"healthicon": "shid",
+	"healthicon": "icon_pin",
 	"flip_x": true,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		0,
+		255,
+		204
 	],
 	"camera_position": [
-		-340,
-		0
+		-290,
+		80
 	],
 	"sing_duration": 6.1,
 	"scale": 1

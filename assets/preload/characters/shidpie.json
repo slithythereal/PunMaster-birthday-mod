@@ -1,77 +1,77 @@
 {
 	"animations": [
 		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "cattershid idle"
+		},
+		{
 			"loop": false,
 			"offsets": [
-				1431,
-				369
+				30,
+				-33
 			],
-			"anim": "singLEFT",
+			"anim": "singDOWN",
 			"fps": 24,
-			"name": "pin left",
+			"name": "cattershiddown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				1,
+				100
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "cattershidu",
 			"indices": []
 		},
 		{
 			"offsets": [
-				0,
-				-40
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "pin down"
-		},
-		{
-			"offsets": [
-				120,
-				170
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "pin up"
-		},
-		{
-			"offsets": [
-				-58,
-				149
+				-22,
+				5
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "pin right"
+			"name": "cattrshidl"
 		},
 		{
 			"offsets": [
-				0,
-				0
+				16,
+				13
 			],
-			"indices": [],
-			"fps": 24,
-			"anim": "idle",
 			"loop": false,
-			"name": "cattershid idle"
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "cattershidr"
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/ballzfi",
 	"position": [
-		-360,
+		0,
 		0
 	],
-	"healthicon": "shid",
-	"flip_x": true,
+	"healthicon": "icon_bfshid",
+	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		0,
+		255,
+		0
 	],
 	"camera_position": [
-		-10,
-		190
+		-450,
+		90
 	],
 	"sing_duration": 6.1,
 	"scale": 0.6
