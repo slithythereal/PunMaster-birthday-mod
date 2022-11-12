@@ -8,7 +8,7 @@ The scratch games + videos referenced:
 - [pinmister (april fools vs pun mod update)](https://gamejolt.com/get/build?game=658551&build=1203306)
 - [(the big one) ultra invasion](https://scratch.mit.edu/projects/376537681/)
 
-SIDE NOTE: THESE REFERENCES MENTIONED ABOVE ARE PRETTY OLD
+SIDE NOTE: THESE REFERENCES MENTIONED ABOVE ARE PRETTY OLD SO THEY MIGHT NOT BE AS GOOD AS WHAT PUN DOES NOW
 
 ### BUILDING INSTRUCTIONS: 
  - this mod uses the same building instructions as normal psych engine ([click here to go to psych engine's readme](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/README.md))
