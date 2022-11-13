@@ -18,4 +18,4 @@ SIDE NOTE: THESE REFERENCES MENTIONED ABOVE ARE PRETTY OLD SO THEY MIGHT NOT BE 
 - this mod was finished on Oct 1st, 2022 (which is Pun's B-Day obvs)
 - this mod took a little over a month to make
 - the 2nd song and it's assets were speedran in a day
-- 🥺🥺please play this mod🥺🥺
+- [🥺🥺please play this mod🥺🥺](https://gamebanana.com/mods/411786)
